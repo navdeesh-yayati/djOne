@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,15 +75,21 @@ WSGI_APPLICATION = 'djOne.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         "NAME": "djone",
+#         "USER": "postgres",
+#         "PASSWORD": "root",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        "NAME": "djone",
-        "USER": "postgres",
-        "PASSWORD": "root",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
 
 
@@ -124,7 +130,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    # BASE_DIR / "static",
     "djOne/static"
 ]
 

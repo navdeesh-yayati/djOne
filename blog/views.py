@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from .forms import BlogForm
@@ -39,6 +40,8 @@ def blog_edit(request, pk):
 
 
 def blog_delete(request, pk):
-    blog = get_object_or_404(Blog, pk=pk)
-    blog.delete()
-    return redirect('blog_list')
+    if request.method == 'POST':
+        blog = get_object_or_404(Blog, pk=pk)
+        blog.delete()
+        return redirect('blog_list')
+    return HttpResponseNotFound()

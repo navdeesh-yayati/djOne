@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local development settings
+local_settings.py
+
+# Virtual environment
+venv/
+
+*.log
+*.log.*
